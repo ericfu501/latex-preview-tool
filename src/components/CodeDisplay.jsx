@@ -8,9 +8,10 @@ const CodeDisplay = ({ content }) => {
     const parts = text.split(/(\$[^$]+\$)/g);
     
     return parts.map((part, index) => {
-      if (part.startsWith('$') && part.endsWith('$')) {
+      if ((part.startsWith('$') && part.endsWith('$')) || 
+          (part.startsWith('$$') && part.endsWith('$$'))) {
         // 渲染LaTeX公式
-        const formula = part.slice(1, -1);
+        const formula = part.startsWith('$$') ? part.slice(2, -2) : part.slice(1, -1);
         const html = katex.renderToString(formula, {
           throwOnError: false
         });

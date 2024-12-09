@@ -1,30 +1,25 @@
-import React from 'react';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
+import React, { useEffect, useRef } from 'react';
 
 const CodeDisplay = ({ content }) => {
-  const renderContent = (text) => {
-    // 分割文本，识别LaTeX公式（在$符号之间的内容）
-    const parts = text.split(/(\$[^$]+\$)/g);
-    
-    return parts.map((part, index) => {
-      if ((part.startsWith('$') && part.endsWith('$')) || 
-          (part.startsWith('$$') && part.endsWith('$$'))) {
-        // 渲染LaTeX公式
-        const formula = part.startsWith('$$') ? part.slice(2, -2) : part.slice(1, -1);
-        const html = katex.renderToString(formula, {
-          throwOnError: false
-        });
-        return <span key={index} dangerouslySetInnerHTML={{ __html: html }} />;
-      }
-      // 普通文本直接返回，保留换行
-      return <span key={index} style={{ whiteSpace: 'pre-wrap' }}>{part}</span>;
-    });
-  };
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // 确保 MathJax 已加载
+    if (window.MathJax && window.MathJax.Hub) {
+      // 替换所有的 \bullet 为 \cdot, 统一格式
+      let processedContent = content.replace(/\\bullet/g, '\\cdot');
+
+      // 更新容器内容
+      containerRef.current.innerHTML = processedContent;
+
+      // 使用 MathJax v2.7.3 的 API 触发重新渲染
+      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, containerRef.current]);
+    }
+  }, [content]);
 
   return (
-    <div className="code-display">
-      {renderContent(content)}
+    <div className="code-display" ref={containerRef}>
+      {content}
     </div>
   );
 };

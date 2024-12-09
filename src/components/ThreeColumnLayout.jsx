@@ -17,8 +17,38 @@ const ThreeColumnLayout = ({ data }) => {
         <CodeDisplay content={data.modelOutput} />
       </div>
       <div className="summary">
-        <h3>总结</h3>
-        <p>{data.summary}</p>
+        <div className="summary-row">
+          <div className="summary-item">
+            <h3>问题类型</h3>
+            <p>{data.type}</p>
+          </div>
+          <div className="summary-item">
+            <h3>修改正确率</h3>
+            <p>{data.percentage}%</p>
+          </div>
+        </div>
+
+        <div className="summary-row">
+          <div className="summary-item points-section">
+            <h3>修改要点</h3>
+            <div className="points-container">
+              <div className="right-points">
+                {data.right && data.right.map((point, index) => (
+                  <p key={index}>✅ {point}</p>
+                ))}
+              </div>
+              <div className="wrong-points">
+                {data.wrong && data.wrong.map((point, index) => (
+                  <p key={index}>❌ {point}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="summary-item">
+            <h3>问题总结</h3>
+            <p>{data.summary}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

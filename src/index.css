@@ -10,7 +10,7 @@ body {
 
 .app {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -66,6 +66,7 @@ h1 {
   font-family: monospace;
   white-space: pre-wrap;
   overflow-x: auto;
+  line-height: 1.95;
 }
 
 .summary {
@@ -84,4 +85,34 @@ h2, h3 {
 
 p {
   line-height: 1.6;
+}
+
+.MathJax_Display {
+  margin: 1.5em 0 !important;
+}
+
+.MathJax {
+  line-height: 1.95 !important;
+}
+
+.problem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.problem-type {
+  margin: 0;
+  font-size: 1.2em;
+  color: #2c3e50;
+}
+
+.correction-rate {
+  background-color: #4CAF50;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.9em;
+  font-weight: 500;
 } 

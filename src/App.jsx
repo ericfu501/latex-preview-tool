@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>LaTeX 预览工具</h1>
+      <h1>LaTeX 伪代码预览工具</h1>
       <ExampleSelector 
         examples={exampleData}
         currentExample={currentExampleId}

@@ -13,3 +13,14 @@ y=x1+D\bullet u；\\
 END1
 $$
 `;
+
+
+
+
+// 逐行处理代码内容，遇到一行的起始是 ${ 这两个符号，为了避免歧义，给$添加 \ 反斜线做转义
+processedContent = processedContent.split('\n').map(line => {
+    if (line.trim().startsWith('${')) {
+      return line.replace('${', '\\${');
+    }
+    return line;
+  }).join('\n');

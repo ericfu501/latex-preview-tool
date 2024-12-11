@@ -25,7 +25,17 @@ $x2=A1 \cdot {Filter}_{Temp}+A2 \cdot x2+H2 \cdot u；$
 $y=x1+D \cdot u；$
 END1
 `,
-    standardOutput: String.raw`$x1 = A1 \cdot x1 + H1$`,
+    standardOutput: String.raw`IF1(Type=0x00)
+$y=u;$
+ELSEIF1(Type=0x0F)
+$x1=A1\ast x1+H1\ast u;$
+$y=x1+D\ast u;$
+ELSEIF1(Type=0xF0)
+$Filter_{Temp}=x1;$
+$x1=x2+H1 \bullet u;$
+$x2=A1 \bullet{Filter}_{Temp}+A2 \bullet x2+H2 \bullet u;$
+$y=x1+D \bullet u;$
+ENDIF1`,
     modelOutput: String.raw`IF1(Type == 0x00)
 y = u;
 ELSEIF1(Type == 0x0F)

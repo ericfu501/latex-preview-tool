@@ -67,6 +67,7 @@ h1 {
   white-space: pre-wrap;
   overflow-x: auto;
   line-height: 1.95;
+  font-size: 1em;
 }
 
 .summary {
@@ -93,6 +94,7 @@ p {
 
 .MathJax {
   line-height: 1.95 !important;
+  font-size: 1.3em !important;
 }
 
 .problem-header {
